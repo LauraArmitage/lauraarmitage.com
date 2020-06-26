@@ -14,7 +14,7 @@
     "node-sass": "^4.11.0"
   },
   "scripts": {
-    "upload": "gulp build && aws s3 sync build/ s3://lauraarmitage.com --acl public-read"
+    "upload": "gulp build && aws s3 sync build/ s3://lauraarmitage.com --acl public-read --exclude .gitkeep"
   },
   "author": "",
   "license": "ISC"
