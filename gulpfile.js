@@ -7,25 +7,42 @@ var
     watch = require('gulp-watch');
 
 sass.compiler = require('node-sass');
- 
-gulp.task('sass', function () {
-  return gulp.src('./src/scss/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./css'));
-});
 
-gulp.task('build', function() {
+function htmlbuild() {
 	return gulp.src(['src/index.html'])
 		.pipe(fileinclude({
 			prefix: '@@',
 			basepath: 'src/'
 		}))
 		.pipe(gulp.dest('./build/'));
+}
+
+function sassbuild() {
+  return gulp.src(['src/scss/main.scss'])
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./build/'));
+}
+
+function jsbuild() {
+	return gulp.src(['src/js/main.js'])
+		// todo minify
+		.pipe(gulp.dest('./build/'));
+}
+ 
+gulp.task('js', jsbuild);
+gulp.task('sass', sassbuild);
+gulp.task('html', htmlbuild);
+
+gulp.task('build', function() {
+	htmlbuild();
+	sassbuild();
+	jsbuild();
 });
 
 gulp.task('watch', function () {
-  return watch('src/*')
-        .pipe(gulp.dest(['sass','build']));
+  gulp.watch('src/**/*.html', htmlbuild);
+  gulp.sass('src/**/*.scss', sassbuild);
+  gulp.sass('src/**/*.js', jsbuild);
 });
 
 // exports.default = defaultTask
