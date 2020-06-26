@@ -1,5 +1,7 @@
+$backgroundColour: #eee;
+
 body {
-	background-color: #eee;
+	background-color: $backgroundColour;
 	margin: 0;
 	font-family: Verdana, sans-serif;
 }
@@ -127,6 +129,20 @@ body {
 	}
 }
 
+.footer {
+	padding: 16px 0;
+	font-style: italic;
+	color: darken($backgroundColour, 40%);
+
+	p {
+		margin: 0;
+
+		&:not(:first-child) {
+			margin-top: 5px
+		}
+	}
+}
+
 .centred {
 	text-align: center;
 }
@@ -151,7 +167,7 @@ a {
 	}
 
 	.content {
-		margin: 30px auto;
+		margin: 30px auto 0;
 	}
 
 	.mobile {
