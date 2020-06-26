@@ -30,19 +30,23 @@ function jsbuild() {
 }
  
 gulp.task('js', jsbuild);
-gulp.task('sass', sassbuild);
+gulp.task('css', sassbuild);
 gulp.task('html', htmlbuild);
 
-gulp.task('build', function() {
-	htmlbuild();
-	sassbuild();
-	jsbuild();
+gulp.task('build', gulp.series(['css', 'js', 'html']));
+
+gulp.task('watch-css', function () {
+  return gulp.watch('src/**/*.scss', sassbuild);
 });
 
-gulp.task('watch', function () {
-  gulp.watch('src/**/*.html', htmlbuild);
-  gulp.sass('src/**/*.scss', sassbuild);
-  gulp.sass('src/**/*.js', jsbuild);
+gulp.task('watch-js', function () {
+  return gulp.watch('src/**/*.js', jsbuild);
 });
+
+gulp.task('watch-html', function () {
+  return gulp.watch('src/**/*.html', htmlbuild);
+});
+
+gulp.task('watch', gulp.parallel(['watch-css', 'watch-js', 'watch-html']));
 
 // exports.default = defaultTask
