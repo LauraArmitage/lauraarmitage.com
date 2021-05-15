@@ -28,12 +28,18 @@ function jsbuild() {
 		// todo minify
 		.pipe(gulp.dest('./build/'));
 }
+
+function imgcopy() {
+	return gulp.src(['img/*'])
+		.pipe(gulp.dest('./build/images/'));
+}
  
 gulp.task('js', jsbuild);
 gulp.task('css', sassbuild);
 gulp.task('html', htmlbuild);
+gulp.task('img', imgcopy);
 
-gulp.task('build', gulp.series(['css', 'js', 'html']));
+gulp.task('build', gulp.series(['css', 'js', 'html', 'img']));
 
 gulp.task('watch-css', function () {
   return gulp.watch('src/**/*.scss', sassbuild);
