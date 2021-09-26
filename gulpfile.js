@@ -4,8 +4,7 @@ var
 	gulp = require('gulp'),
 	fileinclude = require('gulp-file-include'),
 	sass = require('gulp-sass')(require('sass')),
-  watch = require('gulp-watch'),
-  del = require('del');
+  watch = require('gulp-watch');
  
 gulp.task('js', function() {
 	return gulp.src(['src/js/main.js'])
@@ -28,16 +27,12 @@ gulp.task('html', function() {
 		.pipe(gulp.dest('./build/'));
 });
 
-gulp.task('clean', function(){
-  return del(['./build/images/']);
-});
-
 gulp.task('img', function() {
 	return gulp.src(['img/*'])
 		.pipe(gulp.dest('./build/images/'));
 });
 
-gulp.task('build', gulp.series(['css', 'js', 'html', 'clean', 'img']));
+gulp.task('build', gulp.series(['css', 'js', 'html', 'img']));
 
 gulp.task('watch-css', function () {
   return gulp.watch('src/**/*.scss', sassbuild);
