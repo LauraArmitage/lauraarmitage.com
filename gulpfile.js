@@ -3,10 +3,9 @@
 var 
 	gulp = require('gulp'),
 	fileinclude = require('gulp-file-include'),
-	sass = require('gulp-sass'),
-    watch = require('gulp-watch');
+	sass = require('gulp-sass')(require('sass')),
+  watch = require('gulp-watch');
 
-sass.compiler = require('node-sass');
 
 function htmlbuild() {
 	return gulp.src(['src/index.html'])
