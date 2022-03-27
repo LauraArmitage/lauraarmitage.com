@@ -6,17 +6,16 @@
   "main": "index.html",
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^4.0.0",
-    "gulp-file-include": "^2.3.0",
-    "gulp-sass": "^5.0.0",
     "jquery": "^3.6.0",
-    "sass": "^1.42.1",
+    "sass": "^1.49.9",
     "set-value": "^4.0.1",
     "yargs": "^17.2.1"
   },
   "scripts": {
-    "upload": "gulp build && aws s3 sync build/ s3://lauraarmitage.com --acl public-read --exclude .gitkeep"
+    "upload": "gulp build && aws s3 sync build/ s3://lauraarmitage.com --acl public-read --exclude .gitkeep",
+    "js": "cp src/js/main.js build",
+    "img": "mkdir -p build/images && cp img/* build/images"
   },
-  "author": "",
+  "author": "Laura Armitage",
   "license": "ISC"
 }
